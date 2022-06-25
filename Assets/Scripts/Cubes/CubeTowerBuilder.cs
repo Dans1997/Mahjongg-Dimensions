@@ -10,8 +10,8 @@ namespace Cubes
     public class CubeTowerBuilder : MonoBehaviour
     {
         [Header("Cube Prefab")]
-        [SerializeField] GameCube cubePrefab;
-        
+        [SerializeField] Cube cubePrefab;
+
         [Header("Possible Cube Materials")]
         [SerializeField] Material[] cubeMaterials;
         
@@ -24,8 +24,8 @@ namespace Cubes
         /// </summary>
         void BuildGameBoard()
         {
-            GameCube newCube = cubePrefab.CloneObject(transform.position);
-            newCube.SetMaterialToEmptyRenderers(cubeMaterials.RandomElementUsing(new System.Random()));
+            Cube newCube = cubePrefab.CloneObject(transform.position);
+            newCube.SetMaterialToAllFaces(cubeMaterials.RandomElementUsing(new System.Random()));
         }
     }
 }
