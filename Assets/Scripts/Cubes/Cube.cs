@@ -1,4 +1,6 @@
-﻿using Tools;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Tools;
 using UnityEngine;
 
 namespace Cubes
@@ -10,16 +12,26 @@ namespace Cubes
     {
         [Header("General")]
         [Tooltip("Serialized for testing. No need to change this, as it is automatically set.")]
-        [SerializeField] GameCubeType cubeType = GameCubeType.Buttons;
+        [SerializeField] protected GameCubeType cubeType = GameCubeType.Buttons;
         
         [Header("Cube Faces Renderers")]
-        [SerializeField] protected MeshRenderer[] quadRenderers = new MeshRenderer[6];
+        [SerializeField] [NotNull] protected MeshRenderer[] quadRenderers = new MeshRenderer[6];
 
+        /// <summary>
+        /// Public property for the cube type.
+        /// </summary>
+        public GameCubeType CubeType => cubeType;
+        
         /// <summary>
         /// Sets the cube type.
         /// </summary>
         /// <param name="type"></param>
         public void SetCubeType(GameCubeType type) => cubeType = type;
+
+        /// <summary>
+        /// The size of the cube in world units.
+        /// </summary>
+        public abstract float GetWorldCubeSize();
         
         /// <summary>
         /// Assigns the given material to all the mesh renderers of the cube that do not have a material assigned.
@@ -29,6 +41,8 @@ namespace Cubes
         {
             foreach (MeshRenderer quadRenderer in quadRenderers)
             {
+                if (quadRenderer == null) throw new InvalidOperationException("The quad renderer is null.");
+                if (quadRenderer.material == null) throw new InvalidOperationException("The quad renderer material is null.");
                 quadRenderer.material.SetTexture(Constants.ShaderMainTextureID, iconTexture);
             }
         }

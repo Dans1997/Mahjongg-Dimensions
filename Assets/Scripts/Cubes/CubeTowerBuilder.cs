@@ -1,5 +1,7 @@
-﻿using Tools;
+﻿using System;
+using Tools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Cubes
 {
@@ -13,27 +15,55 @@ namespace Cubes
         [SerializeField] Cube cubePrefab;
 
         // Start is called before the first frame update
-        void Start() => BuildGameBoard();
+        void Start() => BuildGameBoard(width: 4, depth: 4);
 
         /// <summary>
         /// Builds the game board.
         /// TODO: how to make sure there is always at least one valid play?
         /// </summary>
-        void BuildGameBoard(string cubeFacePath = null)
+        /// <param name="cubeFacePath">Resources folder path to load game piece faces.</param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="depth"></param>
+        void BuildGameBoard(string cubeFacePath = null, int width = 1, int height = 1, int depth = 1)
         {
-            Cube newCube = cubePrefab.CloneObject(transform.position);
-
-            // Load all the cube faces from the resources folder.
             Texture2D[] cubeFaces = Resources.LoadAll<Texture2D>(string.IsNullOrEmpty(cubeFacePath)
                 ? Constants.DefaultCubeFacePath
                 : cubeFacePath);
-
-            // Pick Random Value From Cube Type Enum
-            GameCubeType cubeType = (GameCubeType) Random.Range(0, System.Enum.GetValues(typeof(GameCubeType)).Length);
             
-            // Find The Cube FACE that matches the cube type.
+            if (cubeFaces == null) throw new Exception("Could not load cube faces from resources.");
+            if (!cubePrefab) throw new Exception("Cube prefab is null.");
+
+            int numberOfPossibleTypes = Enum.GetValues(typeof(GameCubeType)).Length;
+            float sizeMultiplier = cubePrefab.GetWorldCubeSize();
+
+            // Create a 3D Cube Grid
+            for (int z = 0; z < depth; z++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        GameCubeType cubeType = (GameCubeType) Random.Range(0, numberOfPossibleTypes);
+                        CreateCube(cubeType, cubeFaces[(int)cubeType], new Vector3(x, y, z) * sizeMultiplier);
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Wrapper function to avoid code repetition. Creates and sets up a cube.
+        /// </summary>
+        /// <param name="cubeType"></param>
+        /// <param name="cubeFace"></param>
+        /// <param name="position"></param>
+        void CreateCube(GameCubeType cubeType, Texture2D cubeFace, Vector3 position)
+        {
+            Debug.Log($"Creating cube of type {cubeType} at position {position}");
+            Cube newCube = cubePrefab.CloneObject(position);
+            if (newCube == null) throw new Exception("Could not clone cube prefab.");
             newCube.SetCubeType(cubeType);
-            newCube.SetCubeIcon(cubeFaces[(int)cubeType]);
+            newCube.SetCubeIcon(cubeFace);
         }
     }
 }

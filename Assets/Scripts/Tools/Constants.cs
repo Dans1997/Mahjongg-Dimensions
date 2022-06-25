@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Tools
 {
@@ -11,7 +12,7 @@ namespace Tools
         /// Path used to load all possible cube faces in the game.
         /// Note: this is the default path. It's a fallback path if the <see cref="Cubes.CubeTowerBuilder"/> doesn't have a custom path.
         /// </summary>
-        public const string DefaultCubeFacePath = "Default Cube Faces";
+        [NotNull] public const string DefaultCubeFacePath = "Default Cube Faces";
         
         /// <summary>
         /// As string based lookups are inefficient, this stores the id to the main texture of a shader.

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Tools
 {
@@ -14,10 +17,20 @@ namespace Tools
         /// <param name="position">The position to clone the prefab onto.</param>
         /// <param name="rotation">The rotation to assign to the clone.</param>
         /// <returns></returns>
+        [return: NotNull]
         public static T CloneObject<T>(this T prefab, Vector3 position, Quaternion rotation = default) where T : MonoBehaviour
         {
             T clone = Object.Instantiate(prefab, position, rotation);
-            return clone;
+            return clone ? clone : throw new InvalidOperationException();
+        }
+        
+        /// <summary>
+        /// Destroys the given object.
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void DestroyObject<T>(this T obj) where T : Object
+        {
+            Object.Destroy(obj);
         }
     }
 }
