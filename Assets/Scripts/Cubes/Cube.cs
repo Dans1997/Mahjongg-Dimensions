@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Managers;
 using Tools;
 using UnityEngine;
 
@@ -14,13 +15,22 @@ namespace Cubes
         [Tooltip("Serialized for testing. No need to change this, as it is automatically set.")]
         [SerializeField] protected GameCubeType cubeType = GameCubeType.Buttons;
         
-        [Header("Cube Faces Renderers")]
+        [Header("Renderers")]
+        [Tooltip("The game object which contains all the renderers of this cube.")]
+        [SerializeField] GameObject modelGameObject;
+        
+        [Header("Cube Faces")]
         [SerializeField] [NotNull] protected MeshRenderer[] quadRenderers = new MeshRenderer[6];
 
         /// <summary>
         /// Public property for the cube type.
         /// </summary>
         public GameCubeType CubeType => cubeType;
+        
+        /// <summary>
+        /// Public property for the cube's model game object.
+        /// </summary>
+        public GameObject ModelGameObject => modelGameObject;
         
         /// <summary>
         /// Sets the cube type.
@@ -45,6 +55,20 @@ namespace Cubes
                 if (quadRenderer.material == null) throw new InvalidOperationException("The quad renderer material is null.");
                 quadRenderer.material.SetTexture(Constants.ShaderMainTextureID, iconTexture);
             }
+        }
+        
+        /// <summary>
+        /// When a cube is destroyed, it is replaced by a dummy cube that plays a destruction animation.
+        /// For visual purposes.
+        /// </summary>
+        void OnDestroy()
+        {
+            // If application quit was called, return.
+            if (GameManager.WillApplicationQuit) return;
+
+            Transform myTransform = transform;
+            GameObject dummyCube = modelGameObject.CloneObject(myTransform.position, parent: myTransform.parent);
+            dummyCube.AddComponent<CubeDestructionHandler>();
         }
     }
 }

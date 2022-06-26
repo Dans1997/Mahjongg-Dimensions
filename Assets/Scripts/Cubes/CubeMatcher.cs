@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Managers;
 using UnityEngine;
 using Tools;
+using UI;
 
 namespace Cubes
 {
@@ -26,7 +27,7 @@ namespace Cubes
         void OnDestroy()
         {
             GameCube.OnCubeClick -= HandleOnCubeClick;
-            SelectedCubeStack.Clear();
+            ClearStack();
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Cubes
         void HandleOnCubeClick(Cube clickedCube)
         {
             SelectedCubeStack.TryPeek(out Cube peekedCube);
-            if (!GameRules.DoCubesMatch(clickedCube, peekedCube)) SelectedCubeStack.Clear();
+            if (!GameRules.DoCubesMatch(clickedCube, peekedCube)) ClearStack();
             AddToStack(clickedCube);
         }
 
@@ -48,8 +49,25 @@ namespace Cubes
         void AddToStack(Cube cube)
         {
             SelectedCubeStack.Push(cube);
-            if (!GameManager.GameRules.IsCollectionFull(SelectedCubeStack.Count)) return;
-            SelectedCubeStack.DestroyAllObjects();
+
+            if (GameManager.GameRules.IsCollectionFull(SelectedCubeStack.Count))
+            {
+                SelectedCubeStack.DestroyAllObjects();
+                ClearStack();
+                return;
+            }
+            
+            CubeMatcherUI.OnUpdateUI?.Invoke(SelectedCubeStack);
+        }
+
+        /// <summary>
+        /// Wrapper function to clear the stack.
+        /// Created to facilitate notifying the UI of the stack being cleared.
+        /// </summary>
+        void ClearStack()
+        {
+            SelectedCubeStack.Clear();
+            CubeMatcherUI.OnUpdateUI?.Invoke(SelectedCubeStack);
         }
     }
 }
