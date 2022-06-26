@@ -1,4 +1,6 @@
-﻿namespace Cubes
+﻿using UnityEngine;
+
+namespace Cubes
 {
     /// <summary>
     /// Class which stores the information about a game.
@@ -12,14 +14,39 @@
         public int NumberOfCubesToMatch { get; }
         
         /// <summary>
+        /// Dimensions of the game board.
+        /// </summary>
+        public Vector3 CubeGridDimensions { get; }
+        
+        /// <summary>
+        /// How many points are earned for each match.
+        /// </summary>
+        public int BasePointsForEachMatch { get; }
+        
+        /// <summary>
+        /// The number of same-type cubes that exist in the game board at a time.
+        /// </summary>
+        public int NumberOfPossibleTypes { get; }
+
+        /// <summary>
+        /// TODO: Implement timer for the game.
+        /// </summary>
+        /// public ITimer Timer { get; }
+        /// <summary>
         /// Default constructor for the game rules.
         /// </summary>
         /// <param name="numberOfCubesToMatch"></param>
-        public GameRules(int numberOfCubesToMatch)
+        /// <param name="cubeGridDimensions"></param>
+        /// <param name="basePointsForEachMatch"></param>
+        /// <param name="numberOfPossibleTypes"></param>
+        public GameRules(int numberOfCubesToMatch, Vector3 cubeGridDimensions, int basePointsForEachMatch, int numberOfPossibleTypes)
         {
             NumberOfCubesToMatch = numberOfCubesToMatch;
+            CubeGridDimensions = cubeGridDimensions;
+            BasePointsForEachMatch = basePointsForEachMatch;
+            NumberOfPossibleTypes = numberOfPossibleTypes;
         }
-        
+
         /// <summary>
         /// According to the rules, is the given collection of cubes full?
         /// </summary>

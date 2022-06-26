@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Managers;
 using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,17 +17,23 @@ namespace Cubes
         [SerializeField] Cube cubePrefab;
 
         // Start is called before the first frame update
-        void Start() => BuildGameBoard(width: 4, depth: 4);
+        void Start() => GameFlowManager.OnGameStarted += HandleGameStarted;
+        
+        // OnDestroy is called when the script is being destroyed
+        void OnDestroy() => GameFlowManager.OnGameStarted -= HandleGameStarted;
+
+        /// <summary>
+        /// Callback for when the game starts.
+        /// </summary>
+        void HandleGameStarted() => BuildGameBoard(gridDimensions: GameManager.GameRules.CubeGridDimensions);
 
         /// <summary>
         /// Builds the game board.
         /// TODO: how to make sure there is always at least one valid play?
         /// </summary>
         /// <param name="cubeFacePath">Resources folder path to load game piece faces.</param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="depth"></param>
-        void BuildGameBoard(string cubeFacePath = null, int width = 1, int height = 1, int depth = 1)
+        /// <param name="gridDimensions"></param>
+        void BuildGameBoard(string cubeFacePath = null, Vector3 gridDimensions = default)
         {
             Texture2D[] cubeFaces = Resources.LoadAll<Texture2D>(string.IsNullOrEmpty(cubeFacePath)
                 ? Constants.DefaultCubeFacePath
@@ -34,15 +42,17 @@ namespace Cubes
             if (cubeFaces == null) throw new Exception("Could not load cube faces from resources.");
             if (!cubePrefab) throw new Exception("Cube prefab is null.");
 
-            int numberOfPossibleTypes = Enum.GetValues(typeof(GameCubeType)).Length;
+            int numberOfPossibleTypes = GameManager.GameRules.NumberOfPossibleTypes;
+            System.Random rnd = new ();
+            cubeFaces = cubeFaces.OrderBy(_ => rnd.Next()).Take(numberOfPossibleTypes).ToArray();
             float sizeMultiplier = cubePrefab.GetWorldCubeSize();
 
             // Create a 3D Cube Grid
-            for (int z = 0; z < depth; z++)
+            for (int z = 0; z < gridDimensions.z; z++)
             {
-                for (int y = 0; y < width; y++)
+                for (int y = 0; y < gridDimensions.y; y++)
                 {
-                    for (int x = 0; x < height; x++)
+                    for (int x = 0; x < gridDimensions.x; x++)
                     {
                         GameCubeType cubeType = (GameCubeType) Random.Range(0, numberOfPossibleTypes);
                         CreateCube(cubeType, cubeFaces[(int)cubeType], new Vector3(x, y, z) * sizeMultiplier);

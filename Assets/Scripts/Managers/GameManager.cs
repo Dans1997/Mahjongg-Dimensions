@@ -10,8 +10,9 @@ namespace Managers
     {
         /// <summary>
         /// Reference to the current game rules.
+        /// Note: these default values are taken from the assignment document.
         /// </summary>
-        public static GameRules GameRules = new (2);
+        public static GameRules GameRules = new (2, new Vector3(4,4,4), 100, 6);
 
         /// <summary>
         /// Has OnApplicationQuit been called?
