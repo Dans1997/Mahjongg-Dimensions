@@ -55,22 +55,29 @@ namespace Cubes
                     for (int x = 0; x < gridDimensions.x; x++)
                     {
                         GameCubeType cubeType = (GameCubeType) Random.Range(0, numberOfPossibleTypes);
-                        CreateCube(cubeType, cubeFaces[(int)cubeType], new Vector3(x, y, z) * sizeMultiplier);
+                        CreateCube
+                        (
+                            cubeType, 
+                            cubeFaces[(int)cubeType], 
+                            new Vector3(x, y, z) * sizeMultiplier,
+                            transform
+                        );
                     }
                 }
             }
         }
-        
+
         /// <summary>
         /// Wrapper function to avoid code repetition. Creates and sets up a cube.
         /// </summary>
         /// <param name="cubeType"></param>
         /// <param name="cubeFace"></param>
         /// <param name="position"></param>
-        void CreateCube(GameCubeType cubeType, Texture2D cubeFace, Vector3 position)
+        /// <param name="parent"></param>
+        void CreateCube(GameCubeType cubeType, Texture2D cubeFace, Vector3 position, Transform parent)
         {
             Debug.Log($"Creating cube of type {cubeType} at position {position}");
-            Cube newCube = cubePrefab.CloneObject(position);
+            Cube newCube = cubePrefab.CloneObject(position, parent: parent);
             if (newCube == null) throw new Exception("Could not clone cube prefab.");
             newCube.SetCubeType(cubeType);
             newCube.SetCubeIcon(cubeFace);

@@ -1,4 +1,6 @@
 ﻿using Cubes;
+using ScriptableObjects;
+using UI.Buttons;
 using UnityEngine;
 
 namespace Managers
@@ -15,13 +17,34 @@ namespace Managers
         public static GameRules GameRules = new (2, new Vector3(4,4,4), 100, 6);
 
         /// <summary>
-        /// Has OnApplicationQuit been called?
+        /// For now (at least), the game manager is responsible for loading scenes.
         /// </summary>
-        public static bool WillApplicationQuit { get; private set; }
+        void Start()
+        {
+            StartGameButton.OnStartGameButtonPressed += OnStartGameButtonPressed;
+            GoToMainMenuButton.OnGoToMainMenuButtonPressed += OnGoToMainMenuButtonPressed;
+        }
+
+        void OnDestroy()
+        {
+            StartGameButton.OnStartGameButtonPressed -= OnStartGameButtonPressed;
+            GoToMainMenuButton.OnGoToMainMenuButtonPressed -= OnGoToMainMenuButtonPressed;
+        }
 
         /// <summary>
-        /// Called when the application is quitting.
+        /// Called when the start game button is pressed.
         /// </summary>
-        void OnApplicationQuit() => WillApplicationQuit = true;
+        static void OnStartGameButtonPressed() => LoadScene(SceneLoader.MainGameSceneName);
+
+        /// <summary>
+        /// Called when a go to main menu button is pressed.
+        /// </summary>
+        static void OnGoToMainMenuButtonPressed() => LoadScene(SceneLoader.MainMenuSceneName);
+
+        /// <summary>
+        /// Tells the scene loader to load the given scene name.
+        /// </summary>
+        /// <param name="sceneName"></param>
+        static void LoadScene(string sceneName) => SceneLoader.LoadSceneAction?.Invoke(sceneName, TransitionType.BlackFade);
     }
 }

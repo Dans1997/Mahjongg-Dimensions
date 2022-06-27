@@ -8,6 +8,10 @@ namespace Interfaces
     /// </summary>
     public interface IAwaitable
     {
+        /// <summary>
+        /// Coroutine to wait for the behaviour to finish.
+        /// </summary>
+        /// <returns></returns>
         IEnumerator WaitUntilDone();
     }
 }

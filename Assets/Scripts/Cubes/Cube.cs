@@ -63,8 +63,7 @@ namespace Cubes
         /// </summary>
         void OnDestroy()
         {
-            // If application quit was called, return.
-            if (GameManager.WillApplicationQuit) return;
+            if (GameStateManager.CurrentGameState != GameStateManager.GameState.Game) return;
 
             Transform myTransform = transform;
             GameObject dummyCube = modelGameObject.CloneObject(myTransform.position, parent: myTransform.parent);
