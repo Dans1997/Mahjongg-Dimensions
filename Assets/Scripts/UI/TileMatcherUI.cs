@@ -5,6 +5,7 @@ using System.Linq;
 using Cubes;
 using General;
 using Managers;
+using Tiles;
 using UnityEngine;
 using Tools;
 using Unity.VisualScripting;
@@ -15,7 +16,7 @@ namespace UI
     /// UI Class responsible for showing the matched cubes.
     /// Fow now, it shows the cube stack from <see cref="Cubes.CubeMatcher"/>.
     /// </summary>
-    public class CubeMatcherUI : MonoBehaviour
+    public class TileMatcherUI : MonoBehaviour
     {
         [Header("UI References")]
         [SerializeField] RectTransform container;
@@ -29,7 +30,7 @@ namespace UI
         /// <summary>
         /// Fired whenever the UI needs to be updated.
         /// </summary>
-        public static Action<IEnumerable<Cube>> OnUpdateUI { get; private set; }
+        public static Action<IEnumerable<Tile>> OnUpdateUI { get; private set; }
 
         /// <summary>
         /// Array of <see cref="RectTransform"/>s representing the cubes in the UI.
@@ -50,7 +51,7 @@ namespace UI
         /// </summary>
         void CreateUI()
         {
-            cubeUIContainers = new RectTransform[GameManager.GameRules.NumberOfCubesToMatch];
+            cubeUIContainers = new RectTransform[GameManager.GameRules.NumberOfTilesToMatch];
             for (int i = 0; i < cubeUIContainers.Length; i++)
             {
                 RectTransform newCubeUIHolder = new GameObject("CubeUIHolder").AddComponent<RectTransform>();
@@ -68,11 +69,11 @@ namespace UI
         /// Called whenever the UI needs to be updated.
         /// </summary>
         /// <param name="cubeCollection"></param>
-        void UpdateUI(IEnumerable<Cube> cubeCollection)
+        void UpdateUI(IEnumerable<Tile> cubeCollection)
         {
             if (cubeCollection == null) throw new Exception("Cube collection is null!");
 
-            List<Cube> collection = cubeCollection.ToList();
+            List<Tile> collection = cubeCollection.ToList();
             if (!collection.Any())
             {
                 foreach (RectTransform cube in cubeUIContainers)
@@ -84,12 +85,12 @@ namespace UI
             }
             
             int i = 0;
-            foreach (Cube cube in collection)
+            foreach (Tile tile in collection)
             {
-                if (!cube) throw new Exception("Cube reference from collection is null!");
-                GameObject newCube = cube.ModelGameObject.CloneObject(parent: cubeUIContainers[i]?.transform);
-                newCube.transform.localPosition = Vector3.zero;
-                newCube.transform.localScale = Vector3.one * scaleFactor;
+                if (!tile) throw new Exception("Cube reference from collection is null!");
+                GameObject newTile = tile.ModelGameObject.CloneObject(parent: cubeUIContainers[i]?.transform);
+                newTile.transform.localPosition = Vector3.zero;
+                newTile.transform.localScale = Vector3.one * scaleFactor;
                 i++;
             }
         }

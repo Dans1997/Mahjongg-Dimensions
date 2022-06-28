@@ -13,7 +13,7 @@ namespace Managers
         /// <summary>
         /// Called when timer changes its value.
         /// </summary>
-        public static Action<float> OnTimerChanged { get; set; }
+        public static event Action<float> OnTimerChanged;
         
         /// <summary>
         /// Called when timer ends.

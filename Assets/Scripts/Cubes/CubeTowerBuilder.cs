@@ -24,7 +24,7 @@ namespace Cubes
         {
             BuildCubeTower
             (
-                gridDimensions: GameManager.GameRules.CubeGridDimensions
+                gridDimensions: GameManager.GameRules.GameBoardDimensions
             );
         }
         
@@ -55,7 +55,7 @@ namespace Cubes
                 {
                     for (int x = 0; x < gridDimensions.x; x++)
                     {
-                        GameCubeType cubeType = (GameCubeType) Random.Range(0, numberOfPossibleTypes);
+                        TileType cubeType = (TileType) Random.Range(0, numberOfPossibleTypes);
                         CreateCube
                         (
                             cubeType, 
@@ -75,12 +75,12 @@ namespace Cubes
         /// <param name="cubeFace"></param>
         /// <param name="position"></param>
         /// <param name="parent"></param>
-        void CreateCube(GameCubeType cubeType, Texture2D cubeFace, Vector3 position, Transform parent)
+        void CreateCube(TileType cubeType, Texture2D cubeFace, Vector3 position, Transform parent)
         {
             Debug.Log($"Creating cube of type {cubeType} at position {position}");
             Cube newCube = cubePrefab.CloneObject(position, parent: parent);
             if (newCube == null) throw new Exception("Could not clone cube prefab.");
-            newCube.SetCubeType(cubeType);
+            newCube.SetTileType(cubeType);
             newCube.SetCubeIcon(cubeFace);
         }
     }

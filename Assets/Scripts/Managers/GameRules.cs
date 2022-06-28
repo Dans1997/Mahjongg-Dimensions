@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Tiles;
+using UnityEngine;
 
-namespace Cubes
+namespace Managers
 {
     /// <summary>
     /// Class which stores the information about a game.
@@ -9,14 +10,14 @@ namespace Cubes
     public readonly struct GameRules
     {
         /// <summary>
-        /// The number of same-type cubes that must be clicked in order to form a match.
+        /// The number of same-type tiles that must be clicked in order to form a match.
         /// </summary>
-        public int NumberOfCubesToMatch { get; }
+        public int NumberOfTilesToMatch { get; }
         
         /// <summary>
         /// Dimensions of the game board.
         /// </summary>
-        public Vector3 CubeGridDimensions { get; }
+        public Vector3 GameBoardDimensions { get; }
         
         /// <summary>
         /// How many points are earned for each match.
@@ -24,7 +25,7 @@ namespace Cubes
         public int BasePointsForEachMatch { get; }
         
         /// <summary>
-        /// The number of same-type cubes that exist in the game board at a time.
+        /// The number of same-type tiles that exist in the game board at a time.
         /// </summary>
         public int NumberOfPossibleTileTypes { get; }
         
@@ -36,40 +37,40 @@ namespace Cubes
         /// <summary>
         /// Default constructor for the game rules.
         /// </summary>
-        /// <param name="numberOfCubesToMatch"></param>
-        /// <param name="cubeGridDimensions"></param>
+        /// <param name="numberOfTilesToMatch"></param>
+        /// <param name="gameBoardDimensions"></param>
         /// <param name="basePointsForEachMatch"></param>
         /// <param name="numberOfPossibleTileTypes"></param>
         /// <param name="timeLimitInSeconds"></param>
-        public GameRules(int numberOfCubesToMatch, Vector3 cubeGridDimensions, int basePointsForEachMatch, 
+        public GameRules(int numberOfTilesToMatch, Vector3 gameBoardDimensions, int basePointsForEachMatch, 
             int numberOfPossibleTileTypes, int timeLimitInSeconds)
         {
-            NumberOfCubesToMatch = numberOfCubesToMatch;
-            CubeGridDimensions = cubeGridDimensions;
+            NumberOfTilesToMatch = numberOfTilesToMatch;
+            GameBoardDimensions = gameBoardDimensions;
             BasePointsForEachMatch = basePointsForEachMatch;
             NumberOfPossibleTileTypes = numberOfPossibleTileTypes;
             TimeLimitInSeconds = timeLimitInSeconds;
         }
 
         /// <summary>
-        /// According to the rules, is the given collection of cubes full?
+        /// According to the rules, is the given collection of tiles full?
         /// </summary>
         /// <param name="collectionSize"></param>
         /// <returns></returns>
-        public bool IsCollectionFull(int collectionSize) => collectionSize == NumberOfCubesToMatch;
+        public bool IsCollectionFull(int collectionSize) => collectionSize == NumberOfTilesToMatch;
 
         /// <summary>
-        /// Validates two cubes to see if they match.
+        /// Validates two tiles to see if they match.
         /// </summary>
-        /// <param name="clickedCube"></param>
-        /// <param name="peekedCube"></param>
-        /// <returns>Whether or not the cubes are a match.</returns>
-        public static bool DoCubesMatch(Cube clickedCube, Cube peekedCube)
+        /// <param name="clickedTile"></param>
+        /// <param name="peekedTile"></param>
+        /// <returns>Whether or not the tiles are a match.</returns>
+        public static bool DoTilesMatch(Tile clickedTile, Tile peekedTile)
         {
-            if (!clickedCube) throw new System.Exception("Clicked cube is null.");
-            if (!peekedCube) return true;
-            if (peekedCube == clickedCube) return false;
-            return clickedCube.CubeType == peekedCube.CubeType;
+            if (!clickedTile) throw new System.Exception("Clicked tile is null.");
+            if (!peekedTile) return true;
+            if (peekedTile == clickedTile) return false;
+            return clickedTile.TileType == peekedTile.TileType;
         }
     }
 }

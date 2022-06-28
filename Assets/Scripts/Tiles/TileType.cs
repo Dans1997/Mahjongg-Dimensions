@@ -1,11 +1,11 @@
-﻿namespace Cubes
+﻿namespace Tiles
 {
     /// <summary>
     /// When a cube is created, it is assigned a type.
     /// This enum represents the different types of cubes.
     /// They are named after the default icons used to represent them.
     /// </summary>
-    public enum GameCubeType
+    public enum TileType
     {
         Buttons,
         Castle,

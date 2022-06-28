@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Managers;
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -16,7 +17,7 @@ namespace UI
         // Start is called before the first frame update
         void Start()
         {
-            // TODO: scoreText.text = $"Score: \n{ScoreManager.CurrentScore}";
+            if (scoreText != null) scoreText.text = $"Score: \n{ScoreManager.CurrentScore}";
             // TODO: highScoreText.text = $"High Score: \n{ScoreManager.HighScore}";
         }
     }

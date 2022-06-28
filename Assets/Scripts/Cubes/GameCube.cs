@@ -11,11 +11,6 @@ namespace Cubes
     public class GameCube : Cube, IPointerClickHandler
     {
         /// <summary>
-        /// Fired whenever this cube is clicked on.
-        /// </summary>
-        public static Action<GameCube> OnCubeClick { get; set; }
-
-        /// <summary>
         /// Since there's a box collider on the cube, the world size of the cube is the size of the box collider.
         /// </summary>
         public override float GetWorldSize()
@@ -30,8 +25,8 @@ namespace Cubes
         /// <param name="eventData"></param>
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log($"Clicked on cube {cubeType}.");
-            OnCubeClick?.Invoke(this);
+            Debug.Log($"Clicked on cube {TileType}.");
+            OnTileClick?.Invoke(this);
         }
     }
 }

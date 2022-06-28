@@ -1,32 +1,24 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Managers;
-using UnityEngine;
-using Tools;
-using UI;
+using Tiles;
 
 namespace Cubes
 {
     /// <summary>
     /// Class responsible for matching cubes.
     /// </summary>
-    public class CubeMatcher : MonoBehaviour
+    public class CubeMatcher : TileMatcher
     {
-        /// <summary>
-        /// Stack of cubes to match.
-        /// </summary>
-        [NotNull] internal Stack<Cube> SelectedCubeStack { get; private set; } = new (0);
-
         // Awake is called before Start
-        void Awake() => GameCube.OnCubeClick += HandleOnCubeClick;
+        void Awake() => Tile.OnTileClick += HandleOnCubeClick;
         
         // Start is called before the first frame update
-        void Start() => SelectedCubeStack = new Stack<Cube>(GameManager.GameRules.NumberOfCubesToMatch);
+        void Start() => SelectedTileStack = new Stack<Tile>(GameManager.GameRules.NumberOfTilesToMatch);
 
         // OnDestroy is called when the script is destroyed
         void OnDestroy()
         {
-            GameCube.OnCubeClick -= HandleOnCubeClick;
+            Tile.OnTileClick -= HandleOnCubeClick;
             ClearStack();
         }
 
@@ -34,40 +26,11 @@ namespace Cubes
         /// Called when a cube is clicked.
         /// This will check the cube stack and if a match is formed, destroy the cubes.
         /// </summary>
-        void HandleOnCubeClick(Cube clickedCube)
+        void HandleOnCubeClick(Tile clickedCube)
         {
-            SelectedCubeStack.TryPeek(out Cube peekedCube);
-            if (!GameRules.DoCubesMatch(clickedCube, peekedCube)) ClearStack();
+            SelectedTileStack.TryPeek(out Tile peekedCube);
+            if (!GameRules.DoTilesMatch(clickedCube, peekedCube)) ClearStack();
             AddToStack(clickedCube);
-        }
-
-        /// <summary>
-        /// Wrapper function to push a cube to stack.
-        /// Created because after pushing a cube to stack, the now possibly full stack needs to destroy the cubes.
-        /// </summary>
-        /// <param name="cube"></param>
-        void AddToStack(Cube cube)
-        {
-            SelectedCubeStack.Push(cube);
-
-            if (GameManager.GameRules.IsCollectionFull(SelectedCubeStack.Count))
-            {
-                SelectedCubeStack.DestroyAllObjects();
-                ClearStack();
-                return;
-            }
-            
-            CubeMatcherUI.OnUpdateUI?.Invoke(SelectedCubeStack);
-        }
-
-        /// <summary>
-        /// Wrapper function to clear the stack.
-        /// Created to facilitate notifying the UI of the stack being cleared.
-        /// </summary>
-        void ClearStack()
-        {
-            SelectedCubeStack.Clear();
-            CubeMatcherUI.OnUpdateUI?.Invoke(SelectedCubeStack);
         }
     }
 }

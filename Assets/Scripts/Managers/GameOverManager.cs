@@ -13,7 +13,7 @@ namespace Managers
         /// Called when game ends.
         /// Comes with a end game message (for now displayed in the game over UI.)
         /// </summary>
-        public static Action<string> OnGameOver { get; set; }
+        public static Action<string> OnGameEnded { get; set; }
         
         // Start is called before the first frame update
         void Start()
@@ -45,8 +45,8 @@ namespace Managers
         /// <param name="endMessage"></param>
         static void EndGame(string endMessage)
         {
-            OnGameOver?.Invoke(endMessage);
-            OnGameOver = null;
+            OnGameEnded?.Invoke(endMessage);
+            OnGameEnded = null;
         }
     }
 }

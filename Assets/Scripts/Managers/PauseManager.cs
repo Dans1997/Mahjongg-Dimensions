@@ -25,14 +25,14 @@ namespace Managers
         void Start()
         {
             PauseButton.OnPauseButtonPressed += OnPauseButtonPressed;
-            GameOverManager.OnGameOver += OnGameOver;
+            GameOverManager.OnGameEnded += OnGameOver;
         }
 
         // OnDestroy is called when the script is destroyed
         void OnDestroy()
         {
             PauseButton.OnPauseButtonPressed -= OnPauseButtonPressed;
-            GameOverManager.OnGameOver -= OnGameOver;
+            GameOverManager.OnGameEnded -= OnGameOver;
             UnpauseGame();
         }
 

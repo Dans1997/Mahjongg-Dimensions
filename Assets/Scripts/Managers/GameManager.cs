@@ -1,5 +1,4 @@
-﻿using Cubes;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using UI.Buttons;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace Managers
         /// Reference to the current game rules.
         /// Note: these default values are taken from the assignment document.
         /// </summary>
-        public static GameRules GameRules = new (numberOfCubesToMatch: 2, cubeGridDimensions: new Vector3(4,4,4), 
+        public static GameRules GameRules = new (numberOfTilesToMatch: 2, gameBoardDimensions: new Vector3(4,4,4), 
             basePointsForEachMatch: 100, numberOfPossibleTileTypes: 6, 
 #if UNITY_EDITOR
             timeLimitInSeconds: 30);

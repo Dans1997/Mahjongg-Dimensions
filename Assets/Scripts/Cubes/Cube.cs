@@ -12,32 +12,8 @@ namespace Cubes
     /// </summary>
     public abstract class Cube : Tile
     {
-        [Header("General")]
-        [Tooltip("Serialized for testing. No need to change this, as it is automatically set.")]
-        [SerializeField] protected GameCubeType cubeType = GameCubeType.Buttons;
-        
-        [Header("Renderers")]
-        [Tooltip("The game object which contains all the renderers of this cube.")]
-        [SerializeField] GameObject modelGameObject;
-        
         [Header("Cube Faces")]
         [SerializeField] [NotNull] protected MeshRenderer[] quadRenderers = new MeshRenderer[6];
-
-        /// <summary>
-        /// Public property for the cube type.
-        /// </summary>
-        public GameCubeType CubeType => cubeType;
-        
-        /// <summary>
-        /// Public property for the cube's model game object.
-        /// </summary>
-        public GameObject ModelGameObject => modelGameObject;
-        
-        /// <summary>
-        /// Sets the cube type.
-        /// </summary>
-        /// <param name="type"></param>
-        public void SetCubeType(GameCubeType type) => cubeType = type;
 
         /// <summary>
         /// Assigns the given material to all the mesh renderers of the cube that do not have a material assigned.
