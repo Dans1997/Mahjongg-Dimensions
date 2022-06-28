@@ -18,7 +18,7 @@ namespace Cubes
         /// <summary>
         /// Since there's a box collider on the cube, the world size of the cube is the size of the box collider.
         /// </summary>
-        public override float GetWorldCubeSize()
+        public override float GetWorldSize()
         {
             if (!TryGetComponent(out BoxCollider boxCollider)) throw new Exception("Box collider not found on cube.");
             return boxCollider!.size.x;

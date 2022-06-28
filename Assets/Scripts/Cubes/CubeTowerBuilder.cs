@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Managers;
+using Tiles;
 using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,29 +12,29 @@ namespace Cubes
     /// Class responsible for building the game board.
     /// It is composed of a grid of cubes.
     /// </summary>
-    public class CubeTowerBuilder : MonoBehaviour
+    public class CubeTowerBuilder : TileBuilder
     {
         [Header("Cube Prefab")]
-        [SerializeField] Cube cubePrefab;
-
-        // Start is called before the first frame update
-        void Start() => GameFlowManager.OnGameStarted += HandleGameStarted;
+        [SerializeField] protected Cube cubePrefab;
         
-        // OnDestroy is called when the script is being destroyed
-        void OnDestroy() => GameFlowManager.OnGameStarted -= HandleGameStarted;
-
         /// <summary>
-        /// Callback for when the game starts.
+        /// In this case, builds a tower following the <see cref="Managers.GameManager.GameRules"/>.
         /// </summary>
-        void HandleGameStarted() => BuildGameBoard(gridDimensions: GameManager.GameRules.CubeGridDimensions);
-
+        public override void BuildGameBoard()
+        {
+            BuildCubeTower
+            (
+                gridDimensions: GameManager.GameRules.CubeGridDimensions
+            );
+        }
+        
         /// <summary>
         /// Builds the game board.
         /// TODO: how to make sure there is always at least one valid play?
         /// </summary>
         /// <param name="cubeFacePath">Resources folder path to load game piece faces.</param>
         /// <param name="gridDimensions"></param>
-        void BuildGameBoard(string cubeFacePath = null, Vector3 gridDimensions = default)
+        void BuildCubeTower(string cubeFacePath = null, Vector3 gridDimensions = default)
         {
             Texture2D[] cubeFaces = Resources.LoadAll<Texture2D>(string.IsNullOrEmpty(cubeFacePath)
                 ? Constants.DefaultCubeFacePath
@@ -42,10 +43,10 @@ namespace Cubes
             if (cubeFaces == null) throw new Exception("Could not load cube faces from resources.");
             if (!cubePrefab) throw new Exception("Cube prefab is null.");
 
-            int numberOfPossibleTypes = GameManager.GameRules.NumberOfPossibleTypes;
+            int numberOfPossibleTypes = GameManager.GameRules.NumberOfPossibleTileTypes;
             System.Random rnd = new ();
             cubeFaces = cubeFaces.OrderBy(_ => rnd.Next()).Take(numberOfPossibleTypes).ToArray();
-            float sizeMultiplier = cubePrefab.GetWorldCubeSize();
+            float sizeMultiplier = cubePrefab.GetWorldSize();
 
             // Create a 3D Cube Grid
             for (int z = 0; z < gridDimensions.z; z++)

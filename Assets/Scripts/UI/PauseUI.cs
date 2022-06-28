@@ -9,10 +9,10 @@ namespace UI
     public class PauseUI : AwaitableUI
     {
         // Start is called before the first frame update
-        void Start() => GoToMainMenuButton.OnGoToMainMenuButtonPressed += OnGoToMainMenuButtonPressed;
+        void Start() => GoToMainMenuButton.OnGoToMainMenuPressed += OnGoToMainMenuButtonPressed;
         
         // OnDestroy is called when the script instance is being destroyed.
-        void OnDestroy() => GoToMainMenuButton.OnGoToMainMenuButtonPressed -= OnGoToMainMenuButtonPressed;
+        void OnDestroy() => GoToMainMenuButton.OnGoToMainMenuPressed -= OnGoToMainMenuButtonPressed;
 
         /// <summary>
         /// Called whenever a <see cref="GoToMainMenuButton"/> is pressed.

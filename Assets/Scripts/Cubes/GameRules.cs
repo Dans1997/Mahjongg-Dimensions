@@ -26,25 +26,29 @@ namespace Cubes
         /// <summary>
         /// The number of same-type cubes that exist in the game board at a time.
         /// </summary>
-        public int NumberOfPossibleTypes { get; }
-
+        public int NumberOfPossibleTileTypes { get; }
+        
         /// <summary>
-        /// TODO: Implement timer for the game.
+        /// Time limit for a round of the game.
         /// </summary>
-        /// public ITimer Timer { get; }
+        public int TimeLimitInSeconds { get; }
+
         /// <summary>
         /// Default constructor for the game rules.
         /// </summary>
         /// <param name="numberOfCubesToMatch"></param>
         /// <param name="cubeGridDimensions"></param>
         /// <param name="basePointsForEachMatch"></param>
-        /// <param name="numberOfPossibleTypes"></param>
-        public GameRules(int numberOfCubesToMatch, Vector3 cubeGridDimensions, int basePointsForEachMatch, int numberOfPossibleTypes)
+        /// <param name="numberOfPossibleTileTypes"></param>
+        /// <param name="timeLimitInSeconds"></param>
+        public GameRules(int numberOfCubesToMatch, Vector3 cubeGridDimensions, int basePointsForEachMatch, 
+            int numberOfPossibleTileTypes, int timeLimitInSeconds)
         {
             NumberOfCubesToMatch = numberOfCubesToMatch;
             CubeGridDimensions = cubeGridDimensions;
             BasePointsForEachMatch = basePointsForEachMatch;
-            NumberOfPossibleTypes = numberOfPossibleTypes;
+            NumberOfPossibleTileTypes = numberOfPossibleTileTypes;
+            TimeLimitInSeconds = timeLimitInSeconds;
         }
 
         /// <summary>

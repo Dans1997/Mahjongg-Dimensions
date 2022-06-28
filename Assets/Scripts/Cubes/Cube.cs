@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Managers;
+using Tiles;
 using Tools;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Cubes
     /// <summary>
     /// Class which represents a cube in the game.
     /// </summary>
-    public abstract class Cube : MonoBehaviour
+    public abstract class Cube : Tile
     {
         [Header("General")]
         [Tooltip("Serialized for testing. No need to change this, as it is automatically set.")]
@@ -38,11 +39,6 @@ namespace Cubes
         /// <param name="type"></param>
         public void SetCubeType(GameCubeType type) => cubeType = type;
 
-        /// <summary>
-        /// The size of the cube in world units.
-        /// </summary>
-        public abstract float GetWorldCubeSize();
-        
         /// <summary>
         /// Assigns the given material to all the mesh renderers of the cube that do not have a material assigned.
         /// </summary>

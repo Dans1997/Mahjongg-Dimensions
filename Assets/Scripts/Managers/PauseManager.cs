@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Interfaces;
 using Tools;
 using UI;
 using UI.Buttons;
@@ -13,6 +14,7 @@ namespace Managers
     {
         [Header("Pause UI Prefab")] 
         [SerializeField] AwaitableUI pauseUI;
+        [SerializeField] AwaitableUI gameOverUI;
         
         /// <summary>
         /// Is the game currently paused? 
@@ -20,20 +22,43 @@ namespace Managers
         static bool IsGamePaused => Time.timeScale == 0;
         
         // Start is called before the first frame update
-        void Start() => PauseButton.OnPauseButtonPressed += OnPauseButtonPressed;
+        void Start()
+        {
+            PauseButton.OnPauseButtonPressed += OnPauseButtonPressed;
+            GameOverManager.OnGameOver += OnGameOver;
+        }
 
         // OnDestroy is called when the script is destroyed
         void OnDestroy()
         {
             PauseButton.OnPauseButtonPressed -= OnPauseButtonPressed;
+            GameOverManager.OnGameOver -= OnGameOver;
             UnpauseGame();
         }
 
         /// <summary>
-        /// Called when the pause button is pressed.
+        /// Callback for when the pause button is pressed.
         /// The pause manager will pause the game, create a pause UI and wait for it to be closed.
         /// </summary>
-        void OnPauseButtonPressed()
+        void OnPauseButtonPressed() => WaitForUIToUnpause(pauseUI.CloneObject(parent: transform));
+
+        /// <summary>
+        /// Callback for when the game is over.
+        /// The pause manager will pause the game, create a game over UI and wait for it to be closed.
+        /// </summary>
+        /// <param name="endGameMessage"></param>
+        void OnGameOver(string endGameMessage)
+        {
+            AwaitableUI newGameOverUI = gameOverUI.CloneObject(parent: transform);
+            newGameOverUI.SetTitleText(endGameMessage);
+            WaitForUIToUnpause(newGameOverUI);
+        }
+
+        /// <summary>
+        /// Wrapper function to wait for a UI to unpause the game.
+        /// </summary>
+        /// <param name="uiToWait"></param>
+        void WaitForUIToUnpause(IAwaitable uiToWait)
         {
             if (IsGamePaused) return;
             StartCoroutine(PauseCoroutine());
@@ -41,7 +66,7 @@ namespace Managers
             IEnumerator PauseCoroutine()
             {
                 PauseGame();
-                yield return pauseUI.CloneObject(Vector3.zero, parent: null).WaitUntilDone();
+                yield return uiToWait?.WaitUntilDone();
                 UnpauseGame();
             }
         }

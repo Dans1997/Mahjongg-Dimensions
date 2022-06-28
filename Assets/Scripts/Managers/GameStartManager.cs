@@ -9,13 +9,13 @@ namespace Managers
     /// <summary>
     /// Class responsible for starting/stopping the game.
     /// </summary>
-    public class GameFlowManager : MonoBehaviour
+    public class GameStartManager : MonoBehaviour
     {
         /// <summary>
         /// Fired when the game is started.
         /// </summary>
         public static Action OnGameStarted { get; set; }
-        
+
         /// <summary>
         /// Waits for all the game objects to be ready before starting the game.
         /// </summary>

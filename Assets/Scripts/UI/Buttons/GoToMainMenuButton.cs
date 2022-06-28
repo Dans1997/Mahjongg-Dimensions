@@ -10,14 +10,11 @@ namespace UI.Buttons
         /// <summary>
         /// Fired when the start button is pressed.
         /// </summary>
-        public static Action OnGoToMainMenuButtonPressed { get; set; }
+        public static event Action OnGoToMainMenuPressed;
         
         /// <summary>
         /// Fire event so that the game can start.
         /// </summary>
-        protected override void ProcessClick()
-        {
-            OnGoToMainMenuButtonPressed?.Invoke();
-        }
+        protected override void ProcessClick() => OnGoToMainMenuPressed?.Invoke();
     }
 }
