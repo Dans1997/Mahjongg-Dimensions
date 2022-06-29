@@ -1,4 +1,6 @@
-﻿using Tiles;
+﻿using System;
+using Interfaces;
+using Tiles;
 using UnityEngine;
 
 namespace Managers
@@ -13,7 +15,7 @@ namespace Managers
         /// Fired whenever the score changes.
         /// Used mostly for UI.
         /// </summary>
-        public static event System.Action<int> OnScoreChanged;
+        public static event Action<int> OnScoreChanged;
         
         /// <summary>
         /// Current score of the game.
@@ -46,14 +48,18 @@ namespace Managers
         /// Will stop listening for matches to avoid changing the value post-game.
         /// </summary>
         /// <param name="_"></param>
-        static void HandleOnGameEnded(string _) => TileMatcher.OnMatch -= OnMatch;
+        void HandleOnGameEnded(string _) => TileMatcher.OnMatch -= OnMatch;
 
         /// <summary>
         /// Callback for when a match is made.
         /// </summary>
-        static void OnMatch()
+        void OnMatch()
         {
             int scoreToAdd = GameManager.GameRules.BasePointsForEachMatch;
+            
+            ITileMatcherMultiplier[] multipliers = GetComponents<ITileMatcherMultiplier>() ?? Array.Empty<ITileMatcherMultiplier>();
+            foreach (ITileMatcherMultiplier multiplier in multipliers) multiplier!.ChangeScore(ref scoreToAdd);
+            
             CurrentScore += scoreToAdd;
             OnScoreChanged?.Invoke(CurrentScore);
         }
