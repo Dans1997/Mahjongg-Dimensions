@@ -10,6 +10,7 @@ namespace General
     public class DragRotator : MonoBehaviour
     {
         [Header("General")]
+        [SerializeField] bool buildCentroidOnStart = false;
         [SerializeField] bool rotateXAxis;
         [SerializeField] bool rotateYAxis;
         [SerializeField] bool rotateZAxis;
@@ -38,7 +39,11 @@ namespace General
         void Awake() => myTransform = transform;
         
         // Start is called before the first frame update
-        void Start() => TileBuilder.OnAllTilesBuilt += OnTilesBuilt;
+        void Start()
+        {
+            if (buildCentroidOnStart) centroidTransform = CalculateCentroid();
+            TileBuilder.OnAllTilesBuilt += OnTilesBuilt;
+        }
         
         // OnDestroy is called when the script is destroyed
         void OnDestroy() => TileBuilder.OnAllTilesBuilt -= OnTilesBuilt;
