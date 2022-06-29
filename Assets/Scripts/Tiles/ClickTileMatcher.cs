@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using Managers;
-using Tiles;
 
-namespace Cubes
+namespace Tiles
 {
     /// <summary>
-    /// Class responsible for matching cubes.
+    /// Class responsible for matching tiles when they are clicked.
     /// </summary>
-    public class CubeMatcher : TileMatcher
+    public class ClickTileMatcher : TileMatcher
     {
         // Awake is called before Start
         void Awake() => Tile.OnTileClick += HandleOnCubeClick;

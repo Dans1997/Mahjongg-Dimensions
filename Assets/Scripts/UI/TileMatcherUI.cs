@@ -14,7 +14,7 @@ namespace UI
 {
     /// <summary>
     /// UI Class responsible for showing the matched cubes.
-    /// Fow now, it shows the cube stack from <see cref="Cubes.CubeMatcher"/>.
+    /// Fow now, it shows the cube stack from <see cref="ClickTileMatcher"/>.
     /// </summary>
     public class TileMatcherUI : MonoBehaviour
     {

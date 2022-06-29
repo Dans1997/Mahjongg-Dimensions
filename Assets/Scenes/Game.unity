@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 712570424}
   - component: {fileID: 712570426}
   m_Layer: 0
-  m_Name: Cube Matcher
+  m_Name: Tile Matcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 829230380}
   - component: {fileID: 829230384}
   m_Layer: 5
-  m_Name: Cube Matcher UI
+  m_Name: Tile Matcher UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

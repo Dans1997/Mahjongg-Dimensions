@@ -1,4 +1,5 @@
 ﻿using System;
+using Cubes;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Tiles
         public static Action OnAllTilesBuilt { get; set; }
         
         /// <summary>
-        /// Fired when all tiles built by this builder are matched by tile matchers, like <see cref="Cubes.CubeMatcher"/>.
+        /// Fired when all tiles built by this builder are matched by tile matchers, like <see cref="ClickTileMatcher"/>.
         /// This is static based on the assumption that only one tile builder will be used at a time.
         /// </summary>
         public static Action OnAllTilesMatched { get; set; }
