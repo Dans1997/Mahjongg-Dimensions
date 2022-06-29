@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using Tiles;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace General
@@ -10,14 +11,14 @@ namespace General
     public class DragRotator : MonoBehaviour
     {
         [Header("General")]
-        [SerializeField] bool buildCentroidOnStart = false;
+        [SerializeField] bool buildCentroidOnStart;
         [SerializeField] bool rotateXAxis;
         [SerializeField] bool rotateYAxis;
         [SerializeField] bool rotateZAxis;
         
         [Header("Drag")]
-        [SerializeField] bool dragEnabled = true;
         [SerializeField] float dragSpeed = 1f;
+        [SerializeField] float autoDragSpeed = 100f;
         [SerializeField] float dragSensitivity = 1f;
         
         /// <summary>
@@ -41,17 +42,14 @@ namespace General
         // Start is called before the first frame update
         void Start()
         {
-            if (buildCentroidOnStart) centroidTransform = CalculateCentroid();
-            TileBuilder.OnAllTilesBuilt += OnTilesBuilt;
+            if (!buildCentroidOnStart) return;
+            CalculateCentroid();
         }
-        
-        // OnDestroy is called when the script is destroyed
-        void OnDestroy() => TileBuilder.OnAllTilesBuilt -= OnTilesBuilt;
 
         // Update is called once per frame
         void Update()
         {
-            if (!dragEnabled || !Input.GetMouseButton(0)) return;
+            if (!Input.GetMouseButton(0)) return;
             if (!centroidTransform) return;
 
             Vector3 mouseDelta = Input.mousePosition - positionLastFrame;
@@ -67,15 +65,16 @@ namespace General
         void LateUpdate() => positionLastFrame = Input.mousePosition;
         
         /// <summary>
-        /// Callback for when the game starts.
+        /// Enables/Disables the drag functionality.
         /// </summary>
-        void OnTilesBuilt() => centroidTransform = CalculateCentroid();
+        /// <param name="newEnabled"></param>
+        public void SetDragEnabled(bool newEnabled) => enabled = newEnabled;
         
         /// <summary>
         /// Returns the centroid of all the transform's children.
         /// </summary>
         /// <returns></returns>
-        Transform CalculateCentroid()
+        public void CalculateCentroid()
         {
             Transform[] allChildren = transform.gameObject.GetComponentsInChildren<Transform>();
             Vector3 centroidPoint = Vector3.zero;
@@ -83,7 +82,32 @@ namespace General
             centroidPoint = allChildren.Aggregate(centroidPoint, (current, child) => current + child!.transform.position);
             centroidPoint /= numChildren;
             GameObject centroidPointObject = new ("Centroid Point") { transform = { position = centroidPoint }};
-            return centroidPointObject.transform;
+            centroidTransform = centroidPointObject.transform;
+        }
+    
+        /// <summary>
+        /// Rotates the object around the centroid by the given angle.
+        /// </summary>
+        /// <param name="angleToRotate"></param>
+        public void AutoRotateBy(float angleToRotate)
+        {
+            if (!enabled) return;
+            if (!centroidTransform) throw new Exception("Centroid transform not found.");
+            StartCoroutine(RotationCoroutine());
+
+            IEnumerator RotationCoroutine()
+            {
+                enabled = false;
+                float aux = Mathf.Abs(angleToRotate);
+                while (aux > 0f)
+                {
+                    float step = autoDragSpeed * Time.deltaTime;
+                    myTransform!.RotateAround(centroidTransform!.position, Vector3.up, step * Mathf.Sign(angleToRotate));
+                    aux -= step;
+                    yield return null;
+                }
+                enabled = true;
+            }
         }
     }
 }
