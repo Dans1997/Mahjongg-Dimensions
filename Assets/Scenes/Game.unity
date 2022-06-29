@@ -373,6 +373,8 @@ GameObject:
   - component: {fileID: 712570425}
   - component: {fileID: 712570424}
   - component: {fileID: 712570426}
+  - component: {fileID: 712570428}
+  - component: {fileID: 712570427}
   m_Layer: 0
   m_Name: Tile Matcher
   m_TagString: Untagged
@@ -392,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d4856ae7384cd4b3d11a0be56fb774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeDuration: 0.25
 --- !u!4 &712570425
 Transform:
   m_ObjectHideFlags: 0
@@ -417,6 +420,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59019dc88feb4fdb992663fd0ee2550b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &712570427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712570423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af382e2c0d7445481121663a44fed48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &712570428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712570423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c649a7d0642435eb724215b3c1be0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &829230379
@@ -662,7 +689,7 @@ GameObject:
   - component: {fileID: 1230090110}
   - component: {fileID: 1230090112}
   m_Layer: 0
-  m_Name: Cube Tower Builder
+  m_Name: Game Board Builder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9f12bfb1d941f0919d5ca9ea742b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 6820128706805857089, guid: 6983bf61f54388f42976ea6995601d12, type: 3}
+  tilePrefab: {fileID: 6820128706805857089, guid: 6983bf61f54388f42976ea6995601d12, type: 3}
 --- !u!4 &1230090111
 Transform:
   m_ObjectHideFlags: 0

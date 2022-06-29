@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cubes;
 using UnityEngine;
 
 namespace Tools
@@ -10,9 +11,9 @@ namespace Tools
     {
         /// <summary>
         /// Path used to load all possible cube faces in the game.
-        /// Note: this is a fallback path for the <see cref="Cubes.CubeTowerBuilder"/>.
+        /// Note: this is a fallback path for the <see cref="CubeBoardBuilder"/>.
         /// </summary>
-        [NotNull] public const string DefaultCubeFacePath = "Default Cube Faces";
+        [NotNull] public const string DefaultIconTexturePath = "Default Cube Faces";
         
         /// <summary>
         /// Path used to load all possible scene transitions in the game.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cubes;
 using Interfaces;
 using Managers;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace Tiles
 {
     /// <summary>
-    /// Class which represents a tile builder, like <see cref="Cubes.CubeTowerBuilder"/>.
+    /// Class which represents a tile builder, like <see cref="CubeBoardBuilder"/>.
     /// Created to be able to make different types of game boards in the future.
     /// </summary>
     public abstract class TileBuilder : MonoBehaviour, IBoardBuilder
@@ -23,6 +24,11 @@ namespace Tiles
         /// </summary>
         public static Action OnAllTilesMatched { get; set; }
         
+        /// <summary>
+        /// Collection of tiles after they are built.
+        /// </summary>
+        public static Dictionary<Vector3, Tile> BuiltTiles { get; protected set; }
+
         // Start is called before the first frame update
         void Start() => GameStartManager.OnGameStarted += HandleGameStarted;
         

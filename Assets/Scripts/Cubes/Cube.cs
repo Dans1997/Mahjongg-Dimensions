@@ -19,7 +19,7 @@ namespace Cubes
         /// Assigns the given material to all the mesh renderers of the cube that do not have a material assigned.
         /// </summary>
         /// <param name="iconTexture">The material to assign to the empty mesh renderers.</param>
-        public void SetCubeIcon(Texture2D iconTexture)
+        public override void SetTileIcon(Texture2D iconTexture)
         {
             foreach (MeshRenderer quadRenderer in quadRenderers)
             {
@@ -28,7 +28,7 @@ namespace Cubes
                 quadRenderer.material.SetTexture(Constants.ShaderMainTextureID, iconTexture);
             }
         }
-        
+
         /// <summary>
         /// When a cube is destroyed, it is replaced by a dummy cube that plays a destruction animation.
         /// For visual purposes.

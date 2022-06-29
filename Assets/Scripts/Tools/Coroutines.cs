@@ -29,5 +29,26 @@ namespace Tools
             }
             transform.localScale = targetScale;
         }
+
+        /// <summary>
+        /// Coroutine that changes a transform's local scale in a way to make it look like it's shaking.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="startingScale"></param>
+        /// <param name="duration"></param>
+        /// <returns></returns>
+        public static IEnumerator ShakeFor(this Transform transform, Vector3 startingScale, float duration)
+        {
+            if (!transform) throw new System.Exception("Transform is null!");
+            
+            float elapsedTime = 0;
+            while (elapsedTime < duration)
+            {
+                transform.localScale = startingScale + Random.insideUnitSphere * 0.1f;
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            transform.localScale = startingScale;
+        }
     }
 }

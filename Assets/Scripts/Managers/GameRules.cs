@@ -1,5 +1,4 @@
-﻿using Tiles;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Managers
 {
@@ -58,19 +57,5 @@ namespace Managers
         /// <param name="collectionSize"></param>
         /// <returns></returns>
         public bool IsCollectionFull(int collectionSize) => collectionSize == NumberOfTilesToMatch;
-
-        /// <summary>
-        /// Validates two tiles to see if they match.
-        /// </summary>
-        /// <param name="clickedTile"></param>
-        /// <param name="peekedTile"></param>
-        /// <returns>Whether or not the tiles are a match.</returns>
-        public static bool DoTilesMatch(Tile clickedTile, Tile peekedTile)
-        {
-            if (!clickedTile) throw new System.Exception("Clicked tile is null.");
-            if (!peekedTile) return true;
-            if (peekedTile == clickedTile) return false;
-            return clickedTile.TileType == peekedTile.TileType;
-        }
     }
 }
