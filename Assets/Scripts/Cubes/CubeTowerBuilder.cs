@@ -22,10 +22,8 @@ namespace Cubes
         /// </summary>
         public override void BuildGameBoard()
         {
-            BuildCubeTower
-            (
-                gridDimensions: GameManager.GameRules.GameBoardDimensions
-            );
+            BuildCubeTower(gridDimensions: GameManager.GameRules.GameBoardDimensions);
+            OnAllTilesBuilt?.Invoke();
         }
         
         /// <summary>

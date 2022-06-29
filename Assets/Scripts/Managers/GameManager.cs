@@ -14,12 +14,7 @@ namespace Managers
         /// Note: these default values are taken from the assignment document.
         /// </summary>
         public static GameRules GameRules = new (numberOfTilesToMatch: 2, gameBoardDimensions: new Vector3(4,4,4), 
-            basePointsForEachMatch: 100, numberOfPossibleTileTypes: 6, 
-#if UNITY_EDITOR
-            timeLimitInSeconds: 30);
-#else
-            timeLimitInSeconds: 5 * 60);
-#endif
+            basePointsForEachMatch: 100, numberOfPossibleTileTypes: 6, timeLimitInSeconds: 5 * 60);
 
         /// <summary>
         /// For now (at least), the game manager is responsible for loading scenes.

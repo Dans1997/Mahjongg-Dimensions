@@ -12,6 +12,11 @@ namespace Tiles
     public abstract class TileBuilder : MonoBehaviour, IBoardBuilder
     {
         /// <summary>
+        /// Fired when the board is built.
+        /// </summary>
+        public static Action OnAllTilesBuilt { get; set; }
+        
+        /// <summary>
         /// Fired when all tiles built by this builder are matched by tile matchers, like <see cref="Cubes.CubeMatcher"/>.
         /// This is static based on the assumption that only one tile builder will be used at a time.
         /// </summary>
