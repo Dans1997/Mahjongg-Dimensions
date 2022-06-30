@@ -1,4 +1,5 @@
 ﻿using System;
+using Tools;
 using UI.Buttons;
 using UnityEngine;
 
@@ -18,14 +19,14 @@ namespace Managers
         /// <summary>
         /// The audio clip to play.
         /// </summary>
-        [SerializeField] AudioClip audioClip;
+        [SerializeField] AudioClip[] audioClips;
         
         // Awake is called when the script instance is being loaded
         void Awake()
         {
             audioSource = GetComponent<AudioSource>();
-            if (!audioClip) throw new Exception("SoundTrackManager: Audio clip not set.");
-            audioSource!.clip = audioClip;
+            if (!audioClips.HasElements()) throw new Exception("SoundTrackManager: Audio clip not set.");
+            audioSource!.clip = audioClips.RandomElement();
             audioSource.loop = true;
             audioSource.Play();
         }
