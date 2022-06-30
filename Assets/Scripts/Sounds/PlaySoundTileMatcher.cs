@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using System.Collections.Generic;
+using Managers;
 using ScriptableObjects;
 using Tiles;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Sounds
             TileMatcher.OnMatchFail -= OnMatchFail;
         }
 
-        void OnMatch() => onMatchSoundEffects.PlayRandomSound();
+        void OnMatch(Stack<Tile> _) => onMatchSoundEffects.PlayRandomSound();
         void OnMatchFail() => onMatchFailSoundEffects.PlayRandomSound();
     }
 }

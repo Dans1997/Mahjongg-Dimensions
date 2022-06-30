@@ -22,9 +22,21 @@ namespace UI.ManagerDependant
         /// Callback for when the timer changes its value.
         /// </summary>
         /// <param name="currentScore"></param>
-        void OnScoreChanged(int currentScore)
+        void OnScoreChanged(int currentScore) => UpdateText(currentScore);
+
+        /// <summary>
+        /// When the game ends, update the score one last time.
+        /// </summary>
+        /// <param name="endMessage"></param>
+        protected override void OnGameOver(string endMessage) => UpdateText(ScoreManager.CurrentScore);
+
+        /// <summary>
+        /// Wrapper function for updating the text.
+        /// </summary>
+        /// <param name="score"></param>
+        void UpdateText(int score)
         {
-            TextReference!.text = currentScore.ToString("00000", CultureInfo.InvariantCulture);
+            TextReference!.text = score.ToString("00000", CultureInfo.InvariantCulture);
         }
     }
 }

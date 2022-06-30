@@ -15,7 +15,7 @@ namespace Tiles
         /// <summary>
         /// Fired whenever a tile is matched.
         /// </summary>
-        public static event System.Action OnMatch;
+        public static event System.Action<Stack<Tile>> OnMatch;
 
         /// <summary>
         /// Fired whenever the user fails to match a set of tiles.
@@ -38,9 +38,9 @@ namespace Tiles
 
             if (GameManager.GameRules.IsCollectionFull(SelectedTileStack.Count))
             {
+                OnMatch?.Invoke(SelectedTileStack);
                 SelectedTileStack.DestroyAllObjects();
                 ClearStack();
-                OnMatch?.Invoke();
                 return;
             }
             

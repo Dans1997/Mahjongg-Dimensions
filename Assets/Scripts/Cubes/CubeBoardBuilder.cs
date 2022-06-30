@@ -38,33 +38,42 @@ namespace Cubes
             if (iconTextures == null) throw new Exception("Could not load textures from resources.");
             if (!tilePrefab) throw new Exception("Tile prefab is null.");
 
+            int numberOfPossiblePositions = (int) (gridDimensions.x * gridDimensions.y * gridDimensions.z);
             int numberOfPossibleTypes = GameManager.GameRules.NumberOfPossibleTileTypes;
+            float sizeMultiplier = tilePrefab.GetWorldSize();
             System.Random rnd = new ();
             iconTextures = iconTextures.OrderBy(_ => rnd.Next()).Take(numberOfPossibleTypes).ToArray();
-            float sizeMultiplier = tilePrefab.GetWorldSize();
-
-            Dictionary<Vector3, Tile> tiles = new ((int)(gridDimensions.x * gridDimensions.y * gridDimensions.z));
-            for (int z = 0; z < gridDimensions.z; z++)
-            {
-                for (int y = 0; y < gridDimensions.y; y++)
-                {
-                    for (int x = 0; x < gridDimensions.x; x++)
-                    {
-                        TileType tileType = (TileType) Random.Range(0, numberOfPossibleTypes);
-                        Tile newTile = CreateTile
-                        (
-                            tileType, 
-                            iconTextures[(int)tileType], 
-                            new Vector3(x, y, z) * sizeMultiplier,
-                            transform
-                        );
-                        tiles.Add(newTile.transform.position, newTile);
-                    }
-                }
-            }
+            Dictionary<Vector3, Tile> tiles = new (numberOfPossiblePositions);
             
+            // Create A Stack With All Possible Positions
+            List<Vector3> listedPositions = new List<Vector3>(numberOfPossiblePositions);
+            for (int x = 0; x < gridDimensions.x; x++)
+            for (int y = 0; y < gridDimensions.y; y++)
+            for (int z = 0; z < gridDimensions.z; z++)
+                listedPositions.Add(new Vector3(x, y, z));
+            Stack<Vector3> availablePositions = new Stack<Vector3>(listedPositions.OrderBy(_ => rnd.Next()));
+            
+            // Cache Transform For Efficiency
+            Transform myTransform = transform;
+            
+            // Always Create Pairs of Tiles
+            while (availablePositions.Count >= 2)
+            {
+                TileType tileType = (TileType) Random.Range(0, numberOfPossibleTypes);
+                Vector3 randomPosition1 = availablePositions.Pop() * sizeMultiplier;
+                Vector3 randomPosition2 = availablePositions.Pop() * sizeMultiplier;
+                CreateAndAddTile(tileType, iconTextures[(int)tileType], randomPosition1, myTransform);
+                CreateAndAddTile(tileType, iconTextures[(int)tileType], randomPosition2, myTransform);
+            }
+
             BuiltTiles = tiles;
-            OnAllTilesBuilt?.Invoke();
+            InvokeOnAllTilesBuilt();
+            
+            void CreateAndAddTile(TileType tileType, Texture2D iconTexture, Vector3 position, Transform parent)
+            {
+                Tile newTile = CreateTile(tileType, iconTexture, position, parent);
+                tiles.Add(newTile.transform.position, newTile);
+            }
         }
 
         /// <summary>

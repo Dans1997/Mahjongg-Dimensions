@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Interfaces;
 using Tiles;
 using UnityEngine;
@@ -42,18 +43,22 @@ namespace Managers
         /// Resets the score back to zero.
         /// </summary>
         static void ResetScore() => CurrentScore = 0;
-        
+
         /// <summary>
         /// Callback for when the game is over.
         /// Will stop listening for matches to avoid changing the value post-game.
         /// </summary>
         /// <param name="_"></param>
-        void HandleOnGameEnded(string _) => TileMatcher.OnMatch -= OnMatch;
+        void HandleOnGameEnded(string _)
+        {
+            OnScoreChanged?.Invoke(CurrentScore);
+            TileMatcher.OnMatch -= OnMatch;
+        }
 
         /// <summary>
         /// Callback for when a match is made.
         /// </summary>
-        void OnMatch()
+        void OnMatch(Stack<Tile> _)
         {
             int scoreToAdd = GameManager.GameRules.BasePointsForEachMatch;
             

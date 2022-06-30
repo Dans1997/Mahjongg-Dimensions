@@ -19,16 +19,6 @@ namespace UI.ManagerDependant
         protected override void UnsubFromManager() => TimerManager.OnTimerChanged -= OnTimerChanged;
         
         /// <summary>
-        /// Callback for when the game ends
-        /// </summary>
-        /// <param name="endMessage"></param>
-        protected override void OnGameOver(string endMessage)
-        {
-            base.OnGameOver(endMessage);
-            TextReference!.text = "00:00";
-        }
-
-        /// <summary>
         /// Callback for when the timer changes its value.
         /// </summary>
         /// <param name="timerValueInSeconds"></param>
