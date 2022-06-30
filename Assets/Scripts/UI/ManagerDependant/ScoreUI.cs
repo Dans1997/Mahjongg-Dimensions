@@ -34,9 +34,6 @@ namespace UI.ManagerDependant
         /// Wrapper function for updating the text.
         /// </summary>
         /// <param name="score"></param>
-        void UpdateText(int score)
-        {
-            TextReference!.text = score.ToString("00000", CultureInfo.InvariantCulture);
-        }
+        void UpdateText(int score) => TextReference!.text = score.ToString("00000", CultureInfo.InvariantCulture);
     }
 }

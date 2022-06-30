@@ -22,7 +22,7 @@ namespace Managers
         /// Current score of the game.
         /// </summary>
         public static int CurrentScore { get; private set; }
-        
+
         // Start is called before the first frame update
         void Start()
         {

@@ -1,4 +1,5 @@
 ﻿using Managers;
+using Managers.HighScoreManager;
 using TMPro;
 using UnityEngine;
 
@@ -18,7 +19,18 @@ namespace UI
         void Start()
         {
             if (scoreText != null) scoreText.text = $"Score: \n{ScoreManager.CurrentScore}";
-            // TODO: highScoreText.text = $"High Score: \n{ScoreManager.HighScore}";
+            ShowHighScore();
+        }
+
+        /// <summary>
+        /// Sets a high score if it was saved before. Otherwise, it sets the high score to the current score.
+        /// </summary>
+        void ShowHighScore()
+        {
+            int highScore = ScoreManager.CurrentScore;
+            int aux = HighScoreManager.CurrentHighScore;
+            if (aux > 0) highScore = aux;
+            if (highScoreText != null) highScoreText.text = $"High Score: \n{highScore}";
         }
     }
 }
