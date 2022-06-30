@@ -24,9 +24,14 @@ namespace UI.ManagerDependant
         /// <param name="timerValueInSeconds"></param>
         void OnTimerChanged(float timerValueInSeconds)
         {
-            string minutes = Mathf.FloorToInt(timerValueInSeconds / 60).ToString("00");
-            string seconds = Mathf.CeilToInt(timerValueInSeconds % 60).ToString("00");
-            TextReference!.text = $"{minutes}:{seconds}";
+            int minutes = Mathf.FloorToInt(timerValueInSeconds / 60);
+            int seconds = Mathf.CeilToInt(timerValueInSeconds % 60);
+            if (seconds == 60)
+            {
+                seconds = 0;
+                minutes++;
+            }
+            TextReference!.text = $"{minutes:00}:{seconds:00}";
         }
     }
 }
