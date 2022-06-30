@@ -1,4 +1,6 @@
-﻿using Managers;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Managers;
 using ScriptableObjects;
 using Tools;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Sounds
     /// </summary>
     public class PlaySoundOnStart : MonoBehaviour
     {
-        [SerializeField] SoundEffect[] soundEffects;
+        [SerializeField] [NotNull] SoundEffect[] soundEffects = Array.Empty<SoundEffect>();
         [SerializeField] bool playAllSounds;
         [SerializeField] bool destroyOnFinish = true;
         

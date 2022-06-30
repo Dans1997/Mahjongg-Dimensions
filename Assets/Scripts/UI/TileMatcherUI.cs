@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Cubes;
 using General;
 using Managers;
 using Tiles;
 using UnityEngine;
 using Tools;
-using Unity.VisualScripting;
 
 namespace UI
 {
@@ -60,7 +58,7 @@ namespace UI
                 newCubeUIHolder.SetAsFirstSibling();
                 newCubeUIHolder.sizeDelta = rectTransformWidthAndHeight;
                 newCubeUIHolder.Rotate(UnityEngine.Random.Range(-rotationRangeXAxis, rotationRangeXAxis), 0, 0);
-                newCubeUIHolder.AddComponent<ThreeDimensionalRotator>()?.SetRotationSpeed(y: cubeHolderYRotationSpeed);
+                newCubeUIHolder.gameObject.AddComponent<ThreeDimensionalRotator>()?.SetRotationSpeed(y: cubeHolderYRotationSpeed);
                 cubeUIContainers[i] = newCubeUIHolder;
             }
         }

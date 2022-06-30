@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Animations;
+using Animation;
 using ScriptableObjects;
 using Tools;
 using UnityEngine;

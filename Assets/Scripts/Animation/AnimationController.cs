@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace Animations
+namespace Animation
 {
     /// <summary>
     /// General wrapper for animator to avoid code duplication.
@@ -10,12 +11,13 @@ namespace Animations
     public class AnimationController : MonoBehaviour
     {
         // Cached Components
-        Animator animator = null;
+        // ReSharper disable once NotNullMemberIsNotInitialized
+        [NotNull] Animator animator;
     
         // Start is called before the first frame update
         void Start() 
         {
-            animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>()!;
             animator.StartPlayback();
             animator.speed = 1f;
         }
@@ -46,8 +48,10 @@ namespace Animations
         /// <returns></returns>
         public static IEnumerator PlayAnimationUntilTheEnd(this AnimationController animator, int animationHash, bool playBackwards = false)
         {
+            if (!animator) yield break;
             animator.PlayAnimation(animationHash, playBackwards);
-            yield return null; yield return new WaitForSeconds(animator.GetCurrentAnimationLength());
+            yield return null;
+            yield return new WaitForSeconds(animator.GetCurrentAnimationLength());
         }
     }
 }
