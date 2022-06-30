@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1170820747634516911}
   - component: {fileID: 6728040092039180799}
   - component: {fileID: 7672744292224569158}
+  - component: {fileID: 220069578823741872}
   m_Layer: 5
   m_Name: Rotate Button Right
   m_TagString: Untagged
@@ -122,6 +123,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   becomeInactiveOnClick: 0
+--- !u!114 &220069578823741872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791391774442710746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &5317060764750985276
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +154,7 @@ GameObject:
   - component: {fileID: 6143079537851940614}
   - component: {fileID: 7964047170866060156}
   - component: {fileID: 4538546733986580500}
+  - component: {fileID: 7375451256048840118}
   m_Layer: 5
   m_Name: Rotate Button Left
   m_TagString: Untagged
@@ -244,6 +265,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   becomeInactiveOnClick: 0
+--- !u!114 &7375451256048840118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317060764750985276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &5399290747660909259
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +789,7 @@ GameObject:
   - component: {fileID: 5615873156515923354}
   - component: {fileID: 5615873156515923355}
   - component: {fileID: 5615873156515923352}
+  - component: {fileID: 2282328818359187945}
   m_Layer: 5
   m_Name: Reshuffle Button
   m_TagString: Untagged
@@ -858,6 +899,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2282328818359187945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615873156515923358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &5615873156675890533
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +930,7 @@ GameObject:
   - component: {fileID: 5615873156675890529}
   - component: {fileID: 5615873156675890534}
   - component: {fileID: 5615873156675890528}
+  - component: {fileID: 1218143552631476284}
   m_Layer: 5
   m_Name: Pause Button
   m_TagString: Untagged
@@ -980,6 +1041,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   becomeInactiveOnClick: 0
+--- !u!114 &1218143552631476284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615873156675890533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &5615873156772053785
 GameObject:
   m_ObjectHideFlags: 0

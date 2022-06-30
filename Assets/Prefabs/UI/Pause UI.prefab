@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 4436569993014928513}
   - component: {fileID: 4436569993014928512}
   - component: {fileID: 4217533082805899521}
+  - component: {fileID: 6326783614731397032}
   m_Layer: 5
   m_Name: Main Menu Button
   m_TagString: Untagged
@@ -379,6 +380,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   becomeInactiveOnClick: 1
+--- !u!114 &6326783614731397032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436569993014928517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &4436569993070393826
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +411,7 @@ GameObject:
   - component: {fileID: 4436569993070393854}
   - component: {fileID: 4436569993070393825}
   - component: {fileID: 6307066040080481496}
+  - component: {fileID: 8445732270878265580}
   m_Layer: 5
   m_Name: Music Button
   m_TagString: Untagged
@@ -502,6 +523,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   becomeInactiveOnClick: 0
+--- !u!114 &8445732270878265580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436569993070393826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &4436569993075203888
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +688,8 @@ GameObject:
   - component: {fileID: 4436569993240413993}
   - component: {fileID: 4436569993240413988}
   - component: {fileID: 4436569993240413991}
-  - component: {fileID: 4436569993240413990}
+  - component: {fileID: 9022471442796500368}
+  - component: {fileID: 144822356213170702}
   m_Layer: 5
   m_Name: Sound Button
   m_TagString: Untagged
@@ -715,7 +756,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4436569993240413990
+--- !u!114 &9022471442796500368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,7 +765,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4436569993240413992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f7cd3e0d14843a0ba4be9bc6fe007c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -759,6 +800,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  becomeInactiveOnClick: 0
+--- !u!114 &144822356213170702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436569993240413992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &4436569993263485249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,6 +1595,7 @@ GameObject:
   - component: {fileID: 4436569994290555875}
   - component: {fileID: 4436569994290555874}
   - component: {fileID: 4436569994290555877}
+  - component: {fileID: 1846468111383743705}
   m_Layer: 5
   m_Name: Continue Button
   m_TagString: Untagged
@@ -1644,6 +1706,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1846468111383743705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436569994290555879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a74acfce3044fd78b7ea34f53f875ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerEnterSoundEffects: []
+  onPointerMoveSoundEffects: []
+  onPointerExitSoundEffects: []
+  onPointerDownSoundEffects: []
+  onPointerUpSoundEffects: []
+  onPointerClickSoundEffects:
+  - {fileID: 11400000, guid: cf7cc7824d4109f4cb2b223d0fc1a6b0, type: 2}
 --- !u!1 &4436569994308650471
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,16 +33,10 @@ namespace Tiles
             ITileMatcherBlocker[] tileMatcherBlockers = GetComponents<ITileMatcherBlocker>() ?? Array.Empty<ITileMatcherBlocker>();
             if (tileMatcherBlockers.Any(tileMatcherBlocker => !tileMatcherBlocker!.IsMatchAllowedFor(clickedTile, SelectedTileStack)))
             {
-                HandleOnMatchNotAllowed();
+                HandleOnMatchNotAllowed(clickedTile);
                 return;
             }
             AddToStack(clickedTile);
-            
-            void HandleOnMatchNotAllowed()
-            {
-                clickedTile!.PlayNotAllowedAnimation();
-                ClearStack();
-            }
         }
     }
 }

@@ -16,6 +16,11 @@ namespace Tiles
         /// Fired whenever a tile is matched.
         /// </summary>
         public static event System.Action OnMatch;
+
+        /// <summary>
+        /// Fired whenever the user fails to match a set of tiles.
+        /// </summary>
+        public static event System.Action OnMatchFail;
         
         /// <summary>
         /// Stack of tiles to match.
@@ -40,6 +45,17 @@ namespace Tiles
             }
             
             TileMatcherUI.OnUpdateUI?.Invoke(SelectedTileStack);
+        }
+        
+        /// <summary>
+        /// Called when the user fails to match the clicked tiles with the other ones.
+        /// </summary>
+        /// <param name="clickedTile"></param>
+        protected void HandleOnMatchNotAllowed(Tile clickedTile)
+        {
+            clickedTile!.PlayNotAllowedAnimation();
+            OnMatchFail?.Invoke();
+            ClearStack();
         }
 
         /// <summary>

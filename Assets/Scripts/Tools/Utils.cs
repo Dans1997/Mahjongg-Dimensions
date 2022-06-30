@@ -10,17 +10,21 @@ namespace Tools
     public static class Utils
     {
         /// <summary>
+        /// Is the given array not null and not empty?
+        /// </summary>
+        /// <returns></returns>
+        public static bool HasElements<T>(this T[] array) => array is {Length: > 0};
+        
+        /// <summary>
         /// Returns a random element from the given array.
         /// </summary>
         /// <param name="array"></param>
-        /// <param name="rand"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T RandomElementUsing<T>(this T[] array, System.Random rand)
+        public static T RandomElement<T>(this T[] array)
         {
             if (array == null) throw new Exception("Array is null!");
-            if (rand == null) throw new Exception("Random is null!");
-            return array[rand.Next(array.Length)];
+            return array[UnityEngine.Random.Range(0, array.Length)];
         }
         
         /// <summary>
